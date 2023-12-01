@@ -1,0 +1,41 @@
+#BUILD SUAVE
+# Build the first Dockerfile
+sudo docker build -t kasm-jammy:dev -f docker/dockerfile-kasm-core-jammy .
+
+# Build the second Dockerfile, using the image built from the first Dockerfile as the base image
+sudo docker build -t suave:dev --build-arg BASE_IMAGE=kasm-jammy:dev -f docker/dockerfile-suave .
+
+
+
+#RUN SUAVE
+#run suave without saving to host
+sudo docker run -it --shm-size=512m -p 6901:6901 -e VNC_PW=password --security-opt seccomp=unconfined suave:dev
+
+#Optionally you can add the parameter -v <absolute_path_host_compute>:/home/kasm-user/suave/results to save the results into your computer, replace <absolute_path_host_compute> with the absolute path of where you want the data to be saved in your computer, e.g:
+sudo docker run -it --shm-size=512m -v $HOME/suave_results:/home/kasm-user/suave/results -p 6901:6901 -e VNC_PW=password --security-opt seccomp=unconfined suave:dev
+
+
+
+#COMMIT TO EXISTING
+# Get the container ID
+docker ps -a
+
+# Commit changes to a new image
+docker commit <container_id> new-image-name:tag
+
+
+
+#CHANGES VIA CHANGE_DOCKERFILE
+#1. Create changes dockerfile (Create a Dockerfile that includes the necessary instructions for your application.)
+#2.Build the image using dockerfile
+sudo docker build -t new-image-name:tag .
+#3. Start a container based on the newly created image.
+sudo docker run -it new-image-name:tag /bin/bash
+#4. Make any necessary changes or modifications inside the running container. Then, if the changes are significant and you want to keep them, update your Dockerfile accordingly.
+After that, rebuild the Image using the updated Dockerfile:
+docker build -t new-image-name:tag .
+
+
+
+
+
