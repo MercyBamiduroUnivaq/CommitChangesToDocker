@@ -1,0 +1,15 @@
+# Use a base image
+FROM existing-image:tag
+
+# Copy application code
+COPY . /app
+
+# Set working directory
+WORKDIR /app
+
+# Run any necessary commands
+RUN command1 \
+    && command2
+
+# Define command to run the application
+CMD ["executable"]
