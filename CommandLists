@@ -25,6 +25,12 @@ docker commit <container_id> new-image-name:tag
 
 
 
+VERSIONING
+docker tag suave:dev suave:version1
+docker push suave:version1
+
+
+
 #CHANGES VIA CHANGE_DOCKERFILE
 #1. Create changes dockerfile (Create a Dockerfile that includes the necessary instructions for your application.)
 #2.Build the image using dockerfile
