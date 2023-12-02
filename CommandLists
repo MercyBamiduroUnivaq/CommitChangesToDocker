@@ -12,7 +12,7 @@ sudo docker build -t testdocker:dev .
 
 #RUN SUAVE
 #run suave without saving to host
-sudo docker run -it --shm-size=512m -p 6901:6901 -p 8000:8000 p 4902:4902 -e VNC_PW=password --security-opt seccomp=unconfined suave:dev
+sudo docker run -it --shm-size=512m -p 6901:6901 -p 8000:8000 -p 4902:4902 -e VNC_PW=password --security-opt seccomp=unconfined suave:dev
 
 #Optionally you can add the parameter -v <absolute_path_host_compute>:/home/kasm-user/suave/results to save the results into your computer, replace <absolute_path_host_compute> with the absolute path of where you want the data to be saved in your computer, e.g:
 sudo docker run -it --shm-size=512m -v $HOME/suave_results:/home/kasm-user/suave/results -p 6901:6901 -e VNC_PW=password --security-opt seccomp=unconfined suave:dev
