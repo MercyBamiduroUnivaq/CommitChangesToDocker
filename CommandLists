@@ -5,6 +5,9 @@ sudo docker build -t kasm-jammy:dev -f docker/dockerfile-kasm-core-jammy .
 # Build the second Dockerfile, using the image built from the first Dockerfile as the base image
 sudo docker build -t suave:dev --build-arg BASE_IMAGE=kasm-jammy:dev -f docker/dockerfile-suave .
 
+#Build third dockerfile
+sudo docker build -t testdocker:dev .
+
 
 
 #RUN SUAVE
